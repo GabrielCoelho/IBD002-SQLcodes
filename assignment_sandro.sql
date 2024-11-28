@@ -277,3 +277,16 @@ INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 WHERE H.semestre = 1 AND H.ano = 2020 AND H.nota > 5 
 GROUP BY A.nome 
 ORDER BY D.disciplina ASC;
+
+-- 19 Apresentar o Historico escolar do aluno Alex, contendo seu RA, nome, lista de disciplinas que já cursou contendo codigo e nome da disciplina, faltas, nota, ano e semestre. 
+
+SELECT 
+A.nome as 'Nome do Aluno', A.ra as 'R.A.',
+D.disciplina as 'Disciplina', D.codigodisciplina as 'Código da Disciplina',
+H.semestre as 'Cursada no semestre:', H.ano as 'no Ano:', H.faltas as 'Faltando ... Dias', 
+H.nota as 'Nota Final:' 
+FROM historico H 
+INNER JOIN alunos A ON H.ra = A.ra 
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+WHERE A.nome = 'Alex'
+ORDER BY H.ano DESC;

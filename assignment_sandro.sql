@@ -408,3 +408,18 @@ WHERE
   D.disciplina = 'Banco de Dados'
   AND P.nome = 'Sandro'
   AND H.ano = 2019;
+
+-- 24 Apresente uma consulta de nome do aluno, nome da disciplina, faltas, notas e uma informação de reprovado caso nota inferior a 7, e aprovado caso superior a 7. 
+SELECT
+  A.nome as 'Nome do Aluno',
+  D.disciplina as 'Disciplina',
+  H.faltas as 'Faltas',
+  H.nota as 'Nota',
+  CASE
+    WHEN H.nota >= 7 THEN 'Aprovado'
+    ELSE 'Reprovado'
+  END AS 'Fechamento'
+FROM
+  historico H
+  INNER JOIN alunos A ON H.ra = A.ra
+  INNER JOIN disciplina D on H.codigodisciplina = D.codigodisciplina;

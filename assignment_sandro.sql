@@ -230,7 +230,8 @@ FROM alunos A
 INNER JOIN historico H ON A.ra = H.ra
 INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 INNER JOIN professor P ON H.codigoprofessor = P.codigoprofessor
-WHERE P.nome = 'Sandro';
+WHERE P.nome = 'Sandro'
+GROUP BY A.nome;
 
 -- 15 Encontre o RA, Nome e Média das notas dos alunos que cursaram as materias de professores de Mogi Mirim
 
@@ -241,7 +242,8 @@ FROM alunos A
 INNER JOIN historico H ON A.ra = H.ra
 INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 INNER JOIN professor P ON H.codigoprofessor = P.codigoprofessor
-WHERE P.cidade = 'Mogi Mirim';
+WHERE P.cidade = 'Mogi Mirim'
+GROUP BY A.nome;
 
 -- 16 Apresente o número de alunos que fizeram banco de dados e estrutura de dados em 2020 no primeiro semestre. 
 
@@ -252,3 +254,12 @@ INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 WHERE D.disciplina = 'Banco de Dados' 
 AND D.disciplina = 'Banco de Dados' 
 AND H.ano = 2020 AND H.semestre = 1;
+
+-- 17 Apresente a média de notas por disciplina. Ordenar por média decrescente 
+
+SELECT D.disciplina as 'Disciplina',
+AVG(H.nota) as Média
+FROM historico H
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+GROUP BY D.disciplina
+ORDER BY H.nota DESC;

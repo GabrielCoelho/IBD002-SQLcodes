@@ -263,3 +263,17 @@ FROM historico H
 INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 GROUP BY D.disciplina
 ORDER BY H.nota DESC;
+
+-- 18 Apresente nome do aluno, cidade, código da disciplina e nome da disciplina que os alunos tiveram nota superior a 5 no 1º semestre de 2020. ORdenar por nome da disciplina. 
+
+SELECT 
+A.nome as 'Nome do Aluno',
+A.cidade as 'Cidade',
+D.codigodisciplina as 'Código da Disciplina',
+D.disciplina as 'Disciplina cuja nota foi maior que 5 no 1º semestre de 2020'
+FROM historico H
+INNER JOIN alunos A ON H.ra = A.ra 
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+WHERE H.semestre = 1 AND H.ano = 2020 AND H.nota > 5 
+GROUP BY A.nome 
+ORDER BY D.disciplina ASC;

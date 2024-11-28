@@ -290,3 +290,14 @@ INNER JOIN alunos A ON H.ra = A.ra
 INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 WHERE A.nome = 'Alex'
 ORDER BY H.ano DESC;
+
+-- 20 Apresente a quantidade que o aluno José da Silva cursou Banco de Dados 
+
+SELECT 
+A.nome as 'Nome do Aluno',
+D.disciplina as 'Disciplina',
+COUNT(H.codigodisciplina) as 'Vezes que cursou'
+FROM historico H 
+INNER JOIN alunos A ON H.ra = A.ra 
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+WHERE A.nome = 'José da Silva' AND D.disciplina = 'Banco de Dados';

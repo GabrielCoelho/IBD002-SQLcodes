@@ -310,3 +310,18 @@ FROM historico H
 INNER JOIN alunos A ON H.ra = A.ra 
 INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 WHERE D.disciplina = 'Banco de Dados' AND (H.ano = 2019 OR H.ano = 2020);
+
+-- 22 Insira todos os alunos da disciplina de BD em 2019 e que tiveram nota > 5, cursando uma disciplina de TBD (Tópicos em Banco de Dados) em 2018 com o mesmo professor mas frequencia e notas desconhecidas. 
+
+INSERT INTO disciplina(disciplina, cargahoraria) VALUES 
+(
+  'Tópicos em Banco de Dados', 80
+);
+
+INSERT INTO historico(ra, codigodisciplina, codigoprofessor, semestre, ano) VALUES 
+SELECT A.ra, D.codigodisciplina, P.codigoprofessor, 1, 2018 
+FROM historico H
+INNER JOIN alunos A ON H.ra = A.ra
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+INNER JOIN professor P ON H.codigoprofessor = P.codigoprofessor
+WHERE D.disciplina = 'Banco de Dados' AND H.ano = 2019 AND H.nota > 5; 

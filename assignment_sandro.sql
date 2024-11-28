@@ -301,3 +301,12 @@ FROM historico H
 INNER JOIN alunos A ON H.ra = A.ra 
 INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 WHERE A.nome = 'José da Silva' AND D.disciplina = 'Banco de Dados';
+
+-- 21 Apresentar a quantidade de alunos que cursou a disciplina de banco de dados em 2019 e 2020. 
+
+SELECT 
+COUNT(DISTINCT A.ra) as 'Quantidade de aluno que cursou Banco de Dados'
+FROM historico H 
+INNER JOIN alunos A ON H.ra = A.ra 
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+WHERE D.disciplina = 'Banco de Dados' AND (H.ano = 2019 OR H.ano = 2020);

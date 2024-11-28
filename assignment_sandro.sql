@@ -243,3 +243,12 @@ INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
 INNER JOIN professor P ON H.codigoprofessor = P.codigoprofessor
 WHERE P.cidade = 'Mogi Mirim';
 
+-- 16 Apresente o número de alunos que fizeram banco de dados e estrutura de dados em 2020 no primeiro semestre. 
+
+SELECT COUNT(DISTINCT A.ra) as 'Quantidade de alunos que cursaram IBD e IED no primeiro Semestre de 2020' 
+FROM alunos A
+INNER JOIN historico H ON A.ra = H.ra
+INNER JOIN disciplina D ON H.codigodisciplina = D.codigodisciplina
+WHERE D.disciplina = 'Banco de Dados' 
+AND D.disciplina = 'Banco de Dados' 
+AND H.ano = 2020 AND H.semestre = 1;

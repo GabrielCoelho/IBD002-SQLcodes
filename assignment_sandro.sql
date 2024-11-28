@@ -446,3 +446,20 @@ WHERE
   H.nota < 7
 GROUP BY
   D.disciplina;
+
+-- 26 comando sql para acrescentar 0.5 pontos na materia de banco de dados para todos os alunos que participam. 
+UPDATE historico H
+SET
+  nota = CASE
+    WHEN nota <= 9.5 THEN nota + 0.5
+    WHEN nota = 10 THEN 10
+  END
+WHERE
+  codigodisciplina = (
+    SELECT
+      codigodisciplina
+    FROM
+      disciplina
+    WHERE
+      disciplina = 'Banco de Dados'
+  );

@@ -463,3 +463,48 @@ WHERE
     WHERE
       disciplina = 'Banco de Dados'
   );
+
+-- 27 Considere a necessidade de normalizar o DB. Observa-se que o campo CIDADE não atende às normas normais na tabela ALUNOS. Desta forma, apresentar os camondos SQL na sequencia para: 
+-- 27a) Criar uma tabela nova chamada CIDADE e transferir o campo cidade  da tabela alunos para esta tabela. 
+-- 27b) Criar chave primária e identity (auto_increment)
+CREATE TABLE cidade (
+  codigocidade INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(40) UNIQUE NOT NULL
+);
+
+INSERT INTO
+  cidade (nome)
+SELECT DISTINCT
+  cidade
+FROM
+  alunos ON DUPLICATE KEY
+UPDATE nome =
+VALUES
+  (nome);
+
+-- 27c) Criar uma chave estrangeira para a tabela alunos e relacionar. 
+ALTER TABLE alunos ADD (
+  codigocidade INT,
+  CONSTRAINT fk_aluno_cidade FOREIGN KEY (codigocidade) REFERENCES cidade (codigocidade)
+);
+
+-- 27d) Preencher o campo de chave estrangeira da tabela alunos com o código novo da tabela da cidade levando em consideração o campo cidade da tabela alunos. 
+UPDATE alunos A
+INNER JOIN cidade C ON A.cidade = C.nome
+SET
+  A.codigocidade = C.codigocidade;
+
+-- 27e) Excluir o campo cidade na tabela aluno
+ALTER TABLE alunos
+DROP COLUMN cidade;
+
+-- Opcional: Selecionar para trocar o código da cidade pelo nome: 
+SELECT
+  A.ra,
+  A.nome,
+  C.nome
+FROM
+  alunos A
+  JOIN cidade C ON A.codigocidade = C.codigocidade
+ORDER BY
+  A.ra ASC;

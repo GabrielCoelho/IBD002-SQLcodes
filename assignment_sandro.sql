@@ -423,3 +423,26 @@ FROM
   historico H
   INNER JOIN alunos A ON H.ra = A.ra
   INNER JOIN disciplina D on H.codigodisciplina = D.codigodisciplina;
+
+-- 25 Apresente como resultado a média dos alunos REPROVADOS, ou seja média inferior a 5 (???? A Média acima era 7, agora virou 5... Vou fazer dos dois)
+SELECT
+  D.disciplina,
+  AVG(H.nota) AS 'Médias'
+FROM
+  disciplina D
+  JOIN historico H ON D.codigodisciplina = H.codigodisciplina
+WHERE
+  H.nota < 5
+GROUP BY
+  D.disciplina;
+
+SELECT
+  D.disciplina,
+  AVG(H.nota) AS 'Médias'
+FROM
+  disciplina D
+  JOIN historico H ON D.codigodisciplina = H.codigodisciplina
+WHERE
+  H.nota < 7
+GROUP BY
+  D.disciplina;
